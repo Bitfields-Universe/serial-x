@@ -1,0 +1,4 @@
+.user-selectable {
+    user-select: initial;
+    -webkit-user-select: initial;
+}
