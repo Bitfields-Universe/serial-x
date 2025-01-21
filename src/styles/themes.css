@@ -2,7 +2,8 @@
     --gradient-1: linear-gradient(200deg, var(--bg-1), var(--bg-2));
     --gradient-2: linear-gradient(200deg, var(--bg-2), var(--bg-3));
     --gradient-3: linear-gradient(200deg, var(--bg-3), var(--bg-1));
-    --border: 1px dashed var(--bg-3);
+    --border-1: 1px solid var(--bg-2);
+    --border-2: 1px solid var(--bg-3);
     /* sizes */
     --xxsm: 0.125rem;
     --xsm: 0.5rem;
@@ -11,6 +12,8 @@
     --lg: 2rem;
     --xlg: 3rem;
     --xxlg: 4rem;
+    --view-width: 80vw;
+    --view-height: 92vh;
 }
 
 .theme-blackboard {

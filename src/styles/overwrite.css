@@ -1,10 +1,10 @@
 button {
-    min-width: 2vw;
+    min-width: 64px;
+    min-height: 32px;
     color: var(--blue);
     background-color: var(--bg-2);
     padding: var(--xxsm) var(--sm);
     transition: background-color 0.5s;
-    /* background: var(--gradient-2); */
 }
 
 button:hover {

@@ -1,7 +1,10 @@
 // import { useState } from "react";
+import { Routes, Route } from "react-router";
+// import { Outlet } from "react-router";
 // import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
-// import { TopMenu, Dashboard, StatusBar, ThemeSwitch } from "./components/layout";
+import { Home, Settings } from './components/views';
+import { TopMenu } from "./components/layout";
 import { ThemeSwitch } from "./components/layout";
 
 function App() {
@@ -16,19 +19,27 @@ function App() {
   return (
     <main className="container">
       <div className="top">
+        <TopMenu></TopMenu>
         <ThemeSwitch themes={
-          ['theme-blackboard', 'theme-dark-ocean', 'theme-midnight-purple', 'theme-dark-hello-kitty', 'theme-hacker-green',
-            'theme-dark-royal',
-          ]
-        }>
-        </ThemeSwitch>
-        <div className="logo">
-          <p>SERIAL <span className="letter-x">X</span></p>
-        </div>
+        ['theme-blackboard', 'theme-dark-ocean', 'theme-midnight-purple', 'theme-dark-hello-kitty', 'theme-hacker-green',
+          'theme-dark-royal',
+        ]
+      }>
+      </ThemeSwitch>
+      <div className="logo">
+        <p>SERIAL <span className="letter-x">X</span></p>
+      </div>
       </div>
       <div className="middle">
         <div className="sidebar"></div>
-        <div className="view"></div>
+        <div className="view">
+          {/* <Outlet /> */}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+
+        </div>
       </div>
       <div className="bottom"></div>
 
