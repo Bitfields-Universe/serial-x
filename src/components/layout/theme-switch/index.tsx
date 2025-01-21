@@ -40,7 +40,7 @@ interface ThemeSwitchButtonProps {
 export const ThemeSwitchButton: React.FC<ThemeSwitchButtonProps> = ({ switchTheme }) => {
   return (
     <div className='theme-switch'>
-      <button onClick={switchTheme}>Theme</button>
+      <button onClick={switchTheme}>🖌</button>
     </div>
   );
 };

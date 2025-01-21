@@ -14,6 +14,9 @@
     --xxlg: 4rem;
     --view-width: 80vw;
     --view-height: 92vh;
+    --button-width: 4vw;
+    --button-height: 3vh;
+    --dt-sm: 0.5s;
 }
 
 .theme-blackboard {
@@ -30,20 +33,6 @@
     --orange: #FF9100;
 }
 
-.theme-dark-ocean {
-    /* colors */
-    --fg-1: #b0d4e1;
-    --fg-2: #a0c0d1;
-    --fg-3: #8b99b2;
-    --bg-1: #001f2d;
-    --bg-2: #002b3d;
-    --bg-3: #00344c;
-    --red: #FF5A36;
-    --green: #00857a;
-    --blue: #00aaff;
-    --orange: #FF8C00;
-}
-
 .theme-midnight-purple {
     /* colors */
     --fg-1: #d8c7f0;
@@ -56,20 +45,6 @@
     --green: #5bff66;
     --blue: #6231e2;
     --orange: #ff5c00;
-}
-
-.theme-dark-hello-kitty {
-    /* colors */
-    --fg-1: #f8d8e6;
-    --fg-2: #f3a8c9;
-    --fg-3: #f0a1b3;
-    --bg-1: #2b1f2d;
-    --bg-2: #3b2a39;
-    --bg-3: #4c3c4d;
-    --red: #F8A0A1;
-    --green: #8AE8B2;
-    --blue: #F6A6F7;
-    --orange: #FF9E6A;
 }
 
 .theme-hacker-green {

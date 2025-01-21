@@ -20,18 +20,15 @@ function App() {
     <main className="container">
       <div className="top">
         <TopMenu></TopMenu>
-        <ThemeSwitch themes={
-        ['theme-blackboard', 'theme-dark-ocean', 'theme-midnight-purple', 'theme-dark-hello-kitty', 'theme-hacker-green',
-          'theme-dark-royal',
-        ]
-      }>
-      </ThemeSwitch>
-      <div className="logo">
-        <p>SERIAL <span className="letter-x">X</span></p>
-      </div>
+        <ThemeSwitch themes={['theme-blackboard', 'theme-midnight-purple', 'theme-hacker-green', 'theme-dark-royal',]}>
+        </ThemeSwitch>
       </div>
       <div className="middle">
-        <div className="sidebar"></div>
+        <div className="sidebar">
+          <div className="sidebar-item">Ports</div>
+          <div className="sidebar-item">Graph</div>
+          <div className="sidebar-item">Data</div>
+        </div>
         <div className="view">
           {/* <Outlet /> */}
           <Routes>

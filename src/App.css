@@ -56,6 +56,7 @@ body {
     width: 100vw;
     height: 4vh;
     min-height: 32px;
+    padding: 0 var(--sm);
     background-color: var(--bg-1);
     border-bottom: var(--border-1);
 }
@@ -79,11 +80,25 @@ body {
 }
 .middle .sidebar {
     display: flex;
-    width: 15vw;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 10vw;
     min-width: 200px;
     height: 100%;
     background-color: var(--bg-1);
     border-right: var(--border-1);
+}
+.middle .sidebar .sidebar-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: var(--xsm) var(--sm);
+}
+.middle .sidebar .sidebar-item:hover {
+    background-color: var(--bg-2);
 }
 .middle .view {
     display: flex;
