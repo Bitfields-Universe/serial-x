@@ -34,18 +34,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width:  5vw;
+    min-width:  4vw;
     min-height: 32px;
     border: none;
     outline: none;
-    margin: 0 var(--md);
-    padding: 0 var(--md);
+    margin: 0 var(--xsm);
+    padding: 0 var(--xsm);
     color: var(--fg-1);
-    transition: color 1s;
+    transition: color var(--dt-sm);
+}
+.logo:hover {
+    color: var(--blue);
 }
 .logo .letter-x {
     color: var(--blue);
-    transition: color 2s;
+    transition: color var(--dt-sm);
+}
+.logo:hover .letter-x {
+    color: var(--fg-1);
 }
 
 .top {
@@ -86,6 +92,7 @@ body {
     width: 10vw;
     min-width: 200px;
     height: 100%;
+    /* padding: var(--md) 0; */
     background-color: var(--bg-1);
     border-right: var(--border-1);
 }
@@ -95,10 +102,20 @@ body {
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    padding: var(--xsm) var(--sm);
+    padding: var(--xsm) var(--lg);
+    /* border-left: var(--xxsm) solid var(--fg-1); */
+    margin-bottom: var(--xsm);
+    cursor: pointer;
+    color: var(--fg-1);
+    /* background: var(--bg-2); */
+    background: var(--gradient-5);
+    /* background: var(--gradient-1); */
+    transition: color var(--dt-sm);
 }
 .middle .sidebar .sidebar-item:hover {
-    background-color: var(--bg-2);
+    color: var(--bg-1);
+    background: var(--gradient-4);
+    transition: color var(--dt-sm);
 }
 .middle .view {
     display: flex;
@@ -112,6 +129,6 @@ body {
     width: 100vw;
     height: 4vh;
     min-height: 32px;
-    background-color: var(--bg-1);
+    background-color: var(--bg-2);
     border-top: var(--border-1);
 }

@@ -16,12 +16,12 @@ export const Home: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ width: "80vw", height: "92vh", display: "flex", alignItems: "center", justifyContent: "center", background: "transparent" }}>
-      <svg width="80vw" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+    <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "transparent" }}>
+      <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
         <defs>
           <linearGradient id="textGradient" gradientTransform="rotate(-45)">
             <stop offset="0%" stopColor="var(--bg-2)" />
-            <stop offset="40%" stopColor="var(--fg-1)" />
+            <stop offset="50%" stopColor="var(--fg-1)" />
             <stop offset="100%" stopColor="var(--bg-2)" />
           </linearGradient>
         </defs>

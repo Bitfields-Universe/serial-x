@@ -25,9 +25,9 @@ function App() {
       </div>
       <div className="middle">
         <div className="sidebar">
-          <div className="sidebar-item">Ports</div>
-          <div className="sidebar-item">Graph</div>
-          <div className="sidebar-item">Data</div>
+          <div className="sidebar-item">PORTS</div>
+          <div className="sidebar-item">GRAPHS</div>
+          <div className="sidebar-item">DATA</div>
         </div>
         <div className="view">
           {/* <Outlet /> */}

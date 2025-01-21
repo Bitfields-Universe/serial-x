@@ -1,8 +1,10 @@
 :root {
-    --gradient-1: linear-gradient(200deg, var(--bg-1), var(--bg-2));
-    --gradient-2: linear-gradient(200deg, var(--bg-2), var(--bg-3));
-    --gradient-3: linear-gradient(200deg, var(--bg-3), var(--bg-1));
-    --border-1: 1px solid var(--bg-2);
+    --gradient-1: linear-gradient(90deg, var(--bg-1), var(--bg-2));
+    --gradient-2: linear-gradient(90deg, var(--bg-2), var(--bg-3));
+    --gradient-3: linear-gradient(90deg, var(--bg-3), var(--bg-1));
+    --gradient-4: linear-gradient(90deg, var(--fg-1) 0%, transparent 100%);
+    --gradient-5: linear-gradient(90deg, var(--fg-1) 0%, transparent 2%);
+    --border-1: 1px solid black;
     --border-2: 1px solid var(--bg-3);
     /* sizes */
     --xxsm: 0.125rem;
