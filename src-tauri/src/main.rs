@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    tauri_react_ts_template_lib::run()
+    serial_x_lib::run()
 }
