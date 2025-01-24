@@ -22,6 +22,46 @@ body {
     background-color: var(--bg-1);
 }
 
+input {
+    max-width: 30vw;
+}
+
+input[type="text"], textarea {
+    color: var(--fg-1) !important;
+    background-color: var(--bg-3) !important;
+    border-radius: 0;
+    border: none;
+    outline: none;
+}
+input[type="select"], textarea {
+    color: var(--fg-1) !important;
+    background-color: var(--bg-3) !important;
+    border-radius: 0;
+    border: none;
+    outline: none;
+}
+
+select {
+    appearance: unset;
+    color: var(--fg-1) !important;
+    background-color: var(--bg-3) !important;
+    border-radius: 0;
+    border: none;
+    outline: none;
+}
+option {
+    appearance: unset;
+    color: var(--fg-1) !important;
+    background-color: var(--bg-3) !important;
+}
+
+hr {
+    height: 2px;
+    background: var(--gradient-4);
+    border: none;
+    margin: var(--xsm) 0;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -131,4 +171,46 @@ body {
     min-height: 32px;
     background-color: var(--bg-2);
     border-top: var(--border-1);
+}
+
+.port-view {
+    width: var(--view-width);
+    height: var(--view-height);
+    background-color: var(--bg-1);
+    overflow-y: scroll;
+}
+
+.port-view .port-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* width: 70vw; */
+}
+
+.port-view .port-list .port-list-item {
+    min-width: 25vw;
+    padding: var(--xsm);
+    background-color: var(--bg-2);
+    /* border: var(--border-1); */
+    margin: var(--xxsm);
+    cursor: pointer;
+}
+
+.port-view .port-list .port-list-item:hover {
+    background-color: var(--bg-1);
+}
+
+.schema-builder {
+    display: flex;
+    flex-direction: row;
+    width: var(--view-width);
+    height: var(--view-height);
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
