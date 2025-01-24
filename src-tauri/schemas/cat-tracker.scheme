@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1737762166075,
+    "name": "dx",
+    "type": "double"
+  },
+  {
+    "id": 1737762170675,
+    "name": "dy",
+    "type": "double"
+  },
+  {
+    "id": 1737762174220,
+    "name": "dt",
+    "type": "double"
+  },
+  {
+    "id": 1737762177722,
+    "name": "start_time",
+    "type": "double"
+  },
+  {
+    "id": 1737762189369,
+    "name": "end_time",
+    "type": "double"
+  }
+]

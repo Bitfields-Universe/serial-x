@@ -1,20 +1,13 @@
-// import { useState } from "react";
 import { Routes, Route } from "react-router";
-// import { Outlet } from "react-router";
-// import { invoke } from "@tauri-apps/api/core";
+import { NavLink, Outlet } from "react-router";
 import "./App.css";
-import { Home, Settings } from './components/views';
+import { Home, Settings, Port } from './components/views';
 import { TopMenu } from "./components/layout";
 import { ThemeSwitch } from "./components/layout";
+import { SchemaBuilder } from "./components/views/scheme";
+import { SchemaList } from "./components/views/scheme";
 
 function App() {
-  // const [greetMsg, setGreetMsg] = useState("");
-  // const [name, setName] = useState("");
-
-  // async function greet() {
-  // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-  // setGreetMsg(await invoke("greet", { name }));
-  // }
 
   return (
     <main className="container">
@@ -25,15 +18,37 @@ function App() {
       </div>
       <div className="middle">
         <div className="sidebar">
-          <div className="sidebar-item">PORTS</div>
+          <div className="sidebar-item">
+            <NavLink
+              to="/port"
+              className={({ isActive }) =>
+                isActive ? " menu-item active-menu-item" : "menu-item"
+              }
+            >
+              PORTS
+            </NavLink>
+          </div>
+          <div className="sidebar-item">
+            <NavLink
+              to="/scheme"
+              className={({ isActive }) =>
+                isActive ? " menu-item active-menu-item" : "menu-item"
+              }
+            >
+              SCHEMES
+            </NavLink>
+          </div>
           <div className="sidebar-item">GRAPHS</div>
           <div className="sidebar-item">DATA</div>
         </div>
         <div className="view">
-          {/* <Outlet /> */}
+          <Outlet />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/port" element={<Port />} />
+            <Route path="scheme" element={<SchemaList />} />
+            <Route path="scheme/edit/:id" element={<SchemaBuilder />} />
           </Routes>
 
         </div>

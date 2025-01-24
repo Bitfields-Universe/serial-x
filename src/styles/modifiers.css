@@ -2,3 +2,24 @@
     user-select: initial;
     -webkit-user-select: initial;
 }
+
+
+.blue { color: var(--blue)}
+.red { color: var(--red)}
+.orange { color: var(--orange)}
+.green { color: var(--green)}
+.info { color: var(--blue)}
+.error { color: var(--red)}
+.warning { color: var(--orange)}
+.ok { color: var(--green)}
+
+.text-centered {
+    text-align: center;
+}
+.text-at-left {
+    text-align: left;
+}
+
+.half {
+    width: 50%;
+}
