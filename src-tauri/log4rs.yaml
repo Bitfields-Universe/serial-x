@@ -1,0 +1,21 @@
+appenders:
+  stdout:
+    kind: console
+  file:
+    kind: file
+    path: "logs/serialx.log"
+    encoder:
+      pattern: "{d} - {l} - {m}{n}"
+
+root:
+  level: info
+  appenders:
+    - stdout
+    - file
+
+loggers:
+  serial_x:
+    level: debug
+    appenders:
+      - file
+    additive: false
