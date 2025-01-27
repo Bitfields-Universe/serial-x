@@ -6,56 +6,60 @@ import { TopMenu } from "./components/layout";
 import { ThemeSwitch } from "./components/layout";
 import { SchemaBuilder } from "./components/views/scheme";
 import { SchemaList } from "./components/views/scheme";
+import { SerialPortProvider } from "./context/serial-port";
+import { SettingsProvider } from "./context/settings";
 
 function App() {
 
   return (
-    <main className="container">
-      <div className="top">
-        <TopMenu></TopMenu>
-        <ThemeSwitch themes={['theme-blackboard', 'theme-midnight-purple', 'theme-hacker-green', 'theme-dark-royal',]}>
-        </ThemeSwitch>
-      </div>
-      <div className="middle">
-        <div className="sidebar">
-          <div className="sidebar-item">
-            <NavLink
-              to="/port"
-              className={({ isActive }) =>
-                isActive ? " menu-item active-menu-item" : "menu-item"
-              }
-            >
-              PORTS
-            </NavLink>
+    <SettingsProvider>
+      <SerialPortProvider>
+        <main className="container">
+          <div className="top">
+            <TopMenu></TopMenu>
+            <ThemeSwitch themes={['theme-blackboard', 'theme-midnight-purple', 'theme-hacker-green', 'theme-dark-royal',]}>
+            </ThemeSwitch>
           </div>
-          <div className="sidebar-item">
-            <NavLink
-              to="/scheme"
-              className={({ isActive }) =>
-                isActive ? " menu-item active-menu-item" : "menu-item"
-              }
-            >
-              SCHEMES
-            </NavLink>
+          <div className="middle">
+            <div className="sidebar">
+
+              <NavLink
+                to="/port"
+                className={({ isActive }) =>
+                  isActive ? " menu-item active-menu-item sidebar-item" : "menu-item sidebar-item"
+                }
+              >
+                PORTS
+              </NavLink>
+
+              <NavLink
+                to="/scheme"
+                className={({ isActive }) =>
+                  isActive ? " menu-item active-menu-item sidebar-item" : "menu-item sidebar-item"
+                }
+              >
+                SCHEMES
+              </NavLink>
+              <div className="sidebar-item">GRAPHS</div>
+              <div className="sidebar-item">DATA</div>
+            </div>
+            <div className="view">
+              <Outlet />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/port" element={<Port />} />
+                <Route path="scheme" element={<SchemaList />} />
+                <Route path="scheme/edit/:id" element={<SchemaBuilder />} />
+              </Routes>
+
+            </div>
           </div>
-          <div className="sidebar-item">GRAPHS</div>
-          <div className="sidebar-item">DATA</div>
-        </div>
-        <div className="view">
-          <Outlet />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/port" element={<Port />} />
-            <Route path="scheme" element={<SchemaList />} />
-            <Route path="scheme/edit/:id" element={<SchemaBuilder />} />
-          </Routes>
+          <div className="bottom"></div>
 
-        </div>
-      </div>
-      <div className="bottom"></div>
-
-    </main>
+        </main>
+      </SerialPortProvider>
+    </SettingsProvider>
   );
 }
 

@@ -1,0 +1,11 @@
+.top-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.top-menu .menu-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: var(--md);
+}

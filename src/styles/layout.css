@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-1);
+}
+.top {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100vw;
+    height: 4vh;
+    min-height: 32px;
+    padding: 0 var(--sm);
+    background-color: var(--bg-1);
+    border-bottom: var(--border-1);
+}
+.middle {
+    display: flex;
+    width: 100vw;
+    height: 92vh;
+    background-color: var(--bg-1);
+}
+.view {
+    display: flex;
+    width: var(--view-width);
+    height: var(--view-height);
+    background-color: var(--bg-1);
+}
+.bottom {
+    display: flex;
+    width: 100vw;
+    height: 4vh;
+    min-height: 32px;
+    background-color: var(--bg-2);
+    border-top: var(--border-1);
+}

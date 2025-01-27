@@ -1,10 +1,10 @@
 :root {
-    --gradient-1: linear-gradient(90deg, var(--bg-1), var(--bg-2));
-    --gradient-2: linear-gradient(90deg, var(--bg-2), var(--bg-3));
-    --gradient-3: linear-gradient(90deg, var(--bg-3), var(--bg-1));
+    --gradient-1: linear-gradient(270deg, var(--bg-1) 60%, var(--bg-2) 100%);
+    --gradient-2: linear-gradient(270deg, var(--bg-2) 60%, var(--bg-3) 100%);
+    --gradient-3: linear-gradient(270deg, var(--bg-3) 60%, var(--bg-1) 100%);
     --gradient-4: linear-gradient(90deg, var(--fg-1) 0%, transparent 100%);
     --gradient-5: linear-gradient(90deg, var(--fg-1) 0%, transparent 2%);
-    --border-1: 1px solid black;
+    --border-1: 1px solid var(--bg-2);
     --border-2: 1px solid var(--bg-3);
     /* sizes */
     --xxsm: 0.125rem;
@@ -14,7 +14,7 @@
     --lg: 2rem;
     --xlg: 3rem;
     --xxlg: 4rem;
-    --view-width: 90vw;
+    --view-width: 89vw;
     --view-height: 92vh;
     --button-width: 4vw;
     --button-height: 3vh;

@@ -1,0 +1,23 @@
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width:  4vw;
+    min-height: 32px;
+    border: none;
+    outline: none;
+    margin: 0 var(--xsm);
+    padding: 0 var(--xsm);
+    color: var(--fg-1);
+    transition: color var(--dt-sm);
+}
+.logo:hover {
+    color: var(--blue);
+}
+.logo .letter-x {
+    color: var(--blue);
+    transition: color var(--dt-sm);
+}
+.logo:hover .letter-x {
+    color: var(--fg-1);
+}

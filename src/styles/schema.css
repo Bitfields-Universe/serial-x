@@ -1,0 +1,6 @@
+.schema-builder {
+    display: flex;
+    flex-direction: row;
+    width: var(--view-width);
+    height: var(--view-height);
+}

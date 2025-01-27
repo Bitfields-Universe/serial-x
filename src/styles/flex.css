@@ -1,0 +1,32 @@
+.box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    max-width: max-content;
+    background: var(--bg-1);
+    padding: var(--xsm);
+    margin: var(--xxsm) var(--sm);
+}
+
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.separator {
+    width: 2px;
+    height: var(--lg);
+    background-color: var(--bg-3);
+    margin: 0 var(--xsm);
+}
+
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

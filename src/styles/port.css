@@ -1,0 +1,49 @@
+.port-view {
+    width: var(--view-width);
+    height: var(--view-height);
+    background-color: var(--bg-1);
+    overflow-y: scroll;
+    padding: var(--sm);
+}
+
+.port-view .port-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: var(--sm);
+}
+
+.port-view .port-list .port-list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    text-align: left;
+    min-width: 50vw;
+    height: max-content;
+    padding: var(--sm);
+    background-color: var(--bg-1);
+    border-radius: var(--sm);
+    border: var(--border-2);
+    margin: var(--xsm);
+    cursor: pointer;
+}
+
+.port-view .port-list .port-list-item:hover {
+    background-color: var(--bg-2);
+}
+
+.port-view .port-list .port-list-item div {
+    width: 18vw;
+}
+
+
+@media (max-width: 1024px) {
+    .port-view .port-list {
+        width: 50vw;
+        justify-content: flex-start;
+        padding: var(--xxsm);
+    }
+}
