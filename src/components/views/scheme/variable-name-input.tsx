@@ -1,9 +1,6 @@
 import React from 'react';
+import { VariableNameInputProps } from '../../../interface';
 
-interface VariableNameInputProps {
-  value: string;
-  onChange: (value: string) => void;
-}
 
 const VariableNameInput: React.FC<VariableNameInputProps> = ({ value, onChange }) => {
   return (

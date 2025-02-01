@@ -3,12 +3,8 @@ import { useLocation } from 'react-router';
 import VariableNameInput from './variable-name-input';
 import DataTypeSelect from './data-type-select';
 import { invoke } from "@tauri-apps/api/core";
+import { Variable } from '../../../interface';
 
-interface Variable {
-  id: number;
-  name: string;
-  type: string;
-}
 
 export const SchemaBuilder: React.FC = () => {
   const location = useLocation();

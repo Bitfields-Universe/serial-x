@@ -1,27 +1,35 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { invoke } from "@tauri-apps/api/core";
-import { useSerialPort } from '../../../../context/serial-port';
 import { SerialPortListItem } from './serial-port-list-item';
-import { useSettings } from '../../../../context/settings';
-
+import { useSerialPort } from '../../../../context/serial-port';
 
 export const SerialPortList: React.FC = () => {
   const { ports, setPorts } = useSerialPort();
-  const { showOnlyOpenPorts, setShowOnlyOpenPorts, refreshRate, setRefreshRate } = useSettings();
+
+  const getRefreshRate = () => Number(localStorage.getItem('port-scan-rate')) || 10;
+  const getShowOnlyOpenPorts = () => localStorage.getItem('show-only-open-ports') === 'true';
+
+  const [refreshRate, setRefreshRateState] = useState(getRefreshRate);
+  const [showOnlyOpenPorts, setShowOnlyOpenPortsState] = useState(getShowOnlyOpenPorts);
+
+  useEffect(() => {
+    localStorage.setItem('port-scan-rate', refreshRate.toString());
+  }, [refreshRate]);
+
+  useEffect(() => {
+    localStorage.setItem('show-only-open-ports', showOnlyOpenPorts.toString());
+  }, [showOnlyOpenPorts]);
 
   useEffect(() => {
     const fetchPorts = async () => {
       try {
-        const result: string[] = await invoke('get_ports');
+        const result: string[] = await invoke('list_ports');
+
+        console.log(result);
+        
         setPorts(
-          result.map((name) => ({
-            name,
-            status: Math.random() > 0.5 ? 'open' : 'closed',
-            upload: '32kB',
-            download: '10MB',
-            deviceName: 'example',
-          }))
+          result.map((portData) => (JSON.parse(portData)))
         );
       } catch (error) {
         console.error('Error fetching ports:', error);
@@ -33,10 +41,10 @@ export const SerialPortList: React.FC = () => {
     return () => clearInterval(interval);
   }, [refreshRate, setPorts]);
 
-  const filteredPorts = showOnlyOpenPorts ? ports.filter((port) => port.status === 'open') : ports;
+  const filteredPorts = showOnlyOpenPorts ? ports.filter((port) => port.status === true) : ports;
 
   return (
-    <div>
+    <div className='port-view'>
       <div className='box'>
         <div className='box'>
           <label htmlFor='show-only-open-ports'>Show only open ports</label>
@@ -44,9 +52,7 @@ export const SerialPortList: React.FC = () => {
             type='checkbox'
             id='show-only-open-ports'
             checked={showOnlyOpenPorts}
-            onChange={(e) => {
-              setShowOnlyOpenPorts(e.target.checked);
-            }}
+            onChange={(e) => setShowOnlyOpenPortsState(e.target.checked)}
           />
         </div>
         <div className='separator'></div>
@@ -58,10 +64,7 @@ export const SerialPortList: React.FC = () => {
             value={refreshRate}
             min={1}
             max={60}
-            onChange={(e) => {
-              setRefreshRate(Math.min(60, Math.max(1, Number(e.target.value))));
-              localStorage.setItem('port-scan-rate', e.target.value.toString());
-            }}
+            onChange={(e) => setRefreshRateState(Math.min(60, Math.max(1, Number(e.target.value))))}
           />
         </div>
       </div>
@@ -70,7 +73,7 @@ export const SerialPortList: React.FC = () => {
       ) : (
         <div className='port-list'>
           {filteredPorts.map((port) => (
-            <Link key={port.name} to={`/port/${port.name}`}>
+            <Link key={port.name} to={`/port/${port.id}`}>
               <SerialPortListItem port={port} />
             </Link>
           ))}

@@ -3506,6 +3506,7 @@ dependencies = [
  "jsonrpc_v2_client",
  "log",
  "log4rs",
+ "parking_lot",
  "prost",
  "prost-types",
  "rs-uuid",
@@ -3516,6 +3517,7 @@ dependencies = [
  "tauri",
  "tauri-build",
  "tauri-plugin-opener",
+ "tauri-utils",
  "tokio",
  "tokio-macros",
 ]

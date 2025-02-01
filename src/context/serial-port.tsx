@@ -1,17 +1,8 @@
 import React, { createContext, useContext, useState } from 'react';
+import { SerialPort } from '../interface';
+import { SerialPortContextType } from '../interface';
 
-interface SerialPort {
-  name: string;
-  status: 'open' | 'closed';
-  upload: string;
-  download: string;
-  deviceName: string;
-}
 
-interface SerialPortContextType {
-  ports: SerialPort[];
-  setPorts: (ports: SerialPort[]) => void;
-}
 
 const SerialPortContext = createContext<SerialPortContextType | undefined>(undefined);
 

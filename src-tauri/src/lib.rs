@@ -7,8 +7,13 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
-            core::port::get_ports, core::port::open_serial_port, core::port::close_serial_port,
-            core::scheme::save_schema, core::scheme::list_schemas, core::scheme::read_schema,
+            core::port::list_ports,
+            core::port::open_serial_port,
+            core::port::get_serial_port_info,
+            core::port::close_serial_port,
+            core::scheme::save_schema,
+            core::scheme::list_schemas,
+            core::scheme::read_schema,
             core::log::log_message,
         ])
         .run(tauri::generate_context!())

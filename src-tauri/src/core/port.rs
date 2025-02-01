@@ -1,9 +1,13 @@
 #![allow(dead_code)]
 use std::sync::{Arc, Mutex};
-use std::time::Instant;
+use std::time::Duration;
+use rs_uuid::uuid32;
+use serde::{Serialize, Deserialize};
+use serde_json::json;
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct PortInfo {
+    id: String,
     name: String,
     baud_rate: u32,
     data_bits: u8,
@@ -12,29 +16,40 @@ pub struct PortInfo {
     open: bool,
     bytes_received: usize,
     bytes_sent: usize,
-    start_time: Instant,
 }
 
-type SharedPortInfo = Arc<Mutex<Vec<PortInfo>>>;
+pub type SharedPortList = Arc<Mutex<Vec<PortInfo>>>;
 
+/// Lists available serial ports on the system and returns JSON
+#[tauri::command]
+pub fn list_ports(port_list: SharedPortList) -> serde_json::Value {
+    let ports = port_list.lock().unwrap();
+    
+    let port_data: Vec<_> = ports.iter()
+        .map(|p| json!({
+            "id": p.id,
+            "name": p.name,
+            "status": p.open,
+            "upload": p.bytes_sent,
+            "download": p.bytes_received
+        }))
+        .collect();
 
-pub fn list_ports() -> Vec<String> {
-    serialport::available_ports()
-        .expect("No ports found!")
-        .into_iter()
-        .map(|port| port.port_name)
-        .collect()
+    json!(port_data)
 }
 
-pub fn open_port(port_name: &str, baud_rate: u32, port_list: SharedPortInfo) -> bool {
-    let port = serialport::new(port_name, baud_rate)
-        .timeout(std::time::Duration::from_secs(1))
+/// Opens a serial port, adds it to the port list, and assigns a unique ID
+#[tauri::command]
+pub fn open_serial_port(port_name: String, baud_rate: u32, state: tauri::State<SharedPortList>) -> bool {
+    let port = serialport::new(&port_name, baud_rate)
+        .timeout(Duration::from_secs(1))
         .open();
 
     if port.is_ok() {
-        let mut ports = port_list.lock().unwrap();
+        let mut ports = state.inner().lock().unwrap();
         ports.push(PortInfo {
-            name: port_name.to_string(),
+            id: uuid32(), // Unique ID for tracking
+            name: port_name.clone(),
             baud_rate,
             data_bits: 8,
             stop_bits: 1,
@@ -42,7 +57,6 @@ pub fn open_port(port_name: &str, baud_rate: u32, port_list: SharedPortInfo) -> 
             open: true,
             bytes_received: 0,
             bytes_sent: 0,
-            start_time: Instant::now(),
         });
         true
     } else {
@@ -50,32 +64,21 @@ pub fn open_port(port_name: &str, baud_rate: u32, port_list: SharedPortInfo) -> 
     }
 }
 
-pub fn close_port(port_name: &str, port_list: SharedPortInfo) {
-    let mut ports = port_list.lock().unwrap();
+/// Closes a serial port and removes it from the list
+#[tauri::command]
+pub fn close_serial_port(port_name: String, state: tauri::State<SharedPortList>) {
+    let mut ports = state.inner().lock().unwrap();
     if let Some(pos) = ports.iter().position(|p| p.name == port_name) {
         ports.remove(pos);
     }
 }
 
-// fn track_data_flow(port_name: &str, port_list: SharedPortInfo, bytes_sent: usize, bytes_received: usize) {
-//     let mut ports = port_list.lock().unwrap();
-//     if let Some(port) = ports.iter_mut().find(|p| p.name == port_name) {
-//         port.bytes_sent += bytes_sent;
-//         port.bytes_received += bytes_received;
-//     }
-// }
-
+/// Retrieves full info about a specific open port by ID
 #[tauri::command]
-pub fn get_ports() -> Vec<String> {
-    list_ports()
-}
-
-#[tauri::command]
-pub fn open_serial_port(port_name: String, baud_rate: u32, state: tauri::State<SharedPortInfo>) -> bool {
-    open_port(&port_name, baud_rate, state.inner().clone())
-}
-
-#[tauri::command]
-pub fn close_serial_port(port_name: String, state: tauri::State<SharedPortInfo>) {
-    close_port(&port_name, state.inner().clone())
+pub fn get_serial_port_info(port_id: String, state: tauri::State<SharedPortList>) -> Result<serde_json::Value, String> {
+    let ports = state.inner().lock().unwrap();
+    match ports.iter().find(|p| p.id == port_id) {
+        Some(port) => Ok(serde_json::to_value(port).unwrap()),
+        None => Err("Port not found".to_string()),
+    }
 }

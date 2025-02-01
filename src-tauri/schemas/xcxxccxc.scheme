@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1738307618812,
+    "name": "x",
+    "type": "double"
+  },
+  {
+    "id": 1738307623628,
+    "name": "y",
+    "type": "double"
+  },
+  {
+    "id": 1738307625941,
+    "name": "temp",
+    "type": "double"
+  }
+]

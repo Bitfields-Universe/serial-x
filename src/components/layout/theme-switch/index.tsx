@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { ThemeSwitchProps } from '../../../interface';
+import { ThemeSwitchButtonProps } from '../../../interface';
 
-interface ThemeSwitchProps {
-  themes?: string[];
-  storageKey?: string;
-}
 
 export const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ themes = [], storageKey = 'theme' }) => {
   const [currentTheme, setCurrentTheme] = useState<string>(() => {
@@ -31,11 +29,6 @@ export const ThemeSwitch: React.FC<ThemeSwitchProps> = ({ themes = [], storageKe
     </div>
   );
 };
-
-interface ThemeSwitchButtonProps {
-  currentTheme: string;
-  switchTheme: () => void;
-}
 
 export const ThemeSwitchButton: React.FC<ThemeSwitchButtonProps> = ({ switchTheme }) => {
   return (
