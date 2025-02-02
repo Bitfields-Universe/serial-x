@@ -1,11 +1,13 @@
-// Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 use log::error;
 mod core;
+
+pub type SharedPortList = core::port::SharedPortList; // Reuse the type from core::port
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
+        .manage(SharedPortList::default()) // ✅ Use the shared port list from core::port
         .invoke_handler(tauri::generate_handler![
             core::port::list_ports,
             core::port::open_serial_port,

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { invoke } from "@tauri-apps/api/core";
 import { SerialPortListItem } from './serial-port-list-item';
 import { useSerialPort } from '../../../../context/serial-port';
+import { SerialPort } from '../../../../interface';
 
 export const SerialPortList: React.FC = () => {
   const { ports, setPorts } = useSerialPort();
@@ -24,13 +25,10 @@ export const SerialPortList: React.FC = () => {
   useEffect(() => {
     const fetchPorts = async () => {
       try {
-        const result: string[] = await invoke('list_ports');
+        const result: SerialPort[] = await invoke('list_ports'); // No JSON parsing needed
 
-        console.log(result);
-        
-        setPorts(
-          result.map((portData) => (JSON.parse(portData)))
-        );
+        setPorts([...result]); // Ensure React updates state
+
       } catch (error) {
         console.error('Error fetching ports:', error);
       }
@@ -73,7 +71,7 @@ export const SerialPortList: React.FC = () => {
       ) : (
         <div className='port-list'>
           {filteredPorts.map((port) => (
-            <Link key={port.name} to={`/port/${port.id}`}>
+            <Link key={port.name} to={`/port/${port.name.replaceAll('/', '')}`}>
               <SerialPortListItem port={port} />
             </Link>
           ))}

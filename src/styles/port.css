@@ -25,7 +25,6 @@
     height: max-content;
     padding: var(--xsm) 0;
     background-color: var(--bg-1);
-    /* border-radius: var(--sm); */
     border: var(--border-2);
     margin: var(--xsm);
     cursor: pointer;
@@ -47,7 +46,7 @@
 }
 
 .port-list-item:hover .port-name, .port-status, .port-upload {
-    border-right: 2px solid var(--bg-1);
+    border-right: 2px solid var(--bg-3);
 }
 
 .port-info {

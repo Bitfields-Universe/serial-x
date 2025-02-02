@@ -1,39 +1,43 @@
-#![allow(dead_code)]
 use std::sync::{Arc, Mutex};
-use std::time::Duration;
-use rs_uuid::uuid32;
-use serde::{Serialize, Deserialize};
+use rs_uuid::uuid8;
+use tauri::State;
+use serialport::available_ports;
 use serde_json::json;
+use serde::{Serialize, Deserialize};
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct PortInfo {
-    id: String,
-    name: String,
-    baud_rate: u32,
-    data_bits: u8,
-    stop_bits: u8,
-    parity: String,
-    open: bool,
-    bytes_received: usize,
-    bytes_sent: usize,
+    pub id: String,
+    pub name: String,
+    pub baud_rate: u32,
+    pub data_bits: u8,
+    pub stop_bits: u8,
+    pub parity: String,
+    pub open: bool,
+    pub bytes_received: usize,
+    pub bytes_sent: usize,
 }
 
 pub type SharedPortList = Arc<Mutex<Vec<PortInfo>>>;
 
 /// Lists available serial ports on the system and returns JSON
 #[tauri::command]
-pub fn list_ports(port_list: SharedPortList) -> serde_json::Value {
-    let ports = port_list.lock().unwrap();
-    
-    let port_data: Vec<_> = ports.iter()
-        .map(|p| json!({
-            "id": p.id,
-            "name": p.name,
-            "status": p.open,
-            "upload": p.bytes_sent,
-            "download": p.bytes_received
-        }))
-        .collect();
+pub fn list_ports(state: State<SharedPortList>) -> serde_json::Value {
+    let available = available_ports().unwrap_or_else(|_| vec![]); // Get system ports
+    let ports = state.inner().lock().unwrap();
+
+    let port_data: Vec<_> = available.iter().map(|sys_port| {
+        let name = sys_port.port_name.clone();
+        let existing = ports.iter().find(|p| p.name == name);
+
+        json!({
+            "id": uuid8(), // ID if tracked
+            "name": name,
+            "status": existing.map(|p| p.open).unwrap_or(false), // Open if tracked
+            "upload": existing.map(|p| p.bytes_sent).unwrap_or(0),
+            "download": existing.map(|p| p.bytes_received).unwrap_or(0),
+        })
+    }).collect();
 
     json!(port_data)
 }
@@ -42,13 +46,13 @@ pub fn list_ports(port_list: SharedPortList) -> serde_json::Value {
 #[tauri::command]
 pub fn open_serial_port(port_name: String, baud_rate: u32, state: tauri::State<SharedPortList>) -> bool {
     let port = serialport::new(&port_name, baud_rate)
-        .timeout(Duration::from_secs(1))
+        .timeout(std::time::Duration::from_secs(1))
         .open();
 
     if port.is_ok() {
         let mut ports = state.inner().lock().unwrap();
         ports.push(PortInfo {
-            id: uuid32(), // Unique ID for tracking
+            id: uuid8(),
             name: port_name.clone(),
             baud_rate,
             data_bits: 8,
@@ -75,9 +79,9 @@ pub fn close_serial_port(port_name: String, state: tauri::State<SharedPortList>)
 
 /// Retrieves full info about a specific open port by ID
 #[tauri::command]
-pub fn get_serial_port_info(port_id: String, state: tauri::State<SharedPortList>) -> Result<serde_json::Value, String> {
+pub fn get_serial_port_info(name: String, state: tauri::State<SharedPortList>) -> Result<serde_json::Value, String> {
     let ports = state.inner().lock().unwrap();
-    match ports.iter().find(|p| p.id == port_id) {
+    match ports.iter().find(|p| p.name == name) {
         Some(port) => Ok(serde_json::to_value(port).unwrap()),
         None => Err("Port not found".to_string()),
     }

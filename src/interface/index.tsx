@@ -2,8 +2,8 @@ export interface SerialPort {
     id: string;
     name: string;
     status: boolean;
-    bytes_sent: string;
-    bytes_received: string;
+    upload: string;
+    download: string;
     deviceName: string;
 }
 
