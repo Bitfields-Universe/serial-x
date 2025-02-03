@@ -4,7 +4,11 @@ import { invoke } from "@tauri-apps/api/core";
 import { SerialPort } from "../../../../interface";
 
 export const PortInfo = () => {
-  const { name } = useParams(); // Extracts the id from the URL
+  let { name } = useParams(); // Extracts the id from the URL
+  if (name) {
+    name = atob(name);
+  }
+  console.log("name: ", name);
   const [portData, setPortData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -16,6 +20,8 @@ export const PortInfo = () => {
     const fetchPortInfo = async () => {
       try {
         const data: SerialPort = await invoke("get_port_info", { name });
+        console.log("data: ", data);
+
         setPortData(data as SerialPort);
         // Assuming portData includes a field indicating whether the port is open
         setIsPortOpen(data.status || false); // Adjust based on actual data structure
@@ -50,7 +56,7 @@ export const PortInfo = () => {
   return (
     <div className="port-info p-4 border rounded-lg bg-gray-100">
       <h1 className="text-xl font-bold">Port Info</h1>
-      <p className="font-mono">Port ID: {name}</p>
+      <p className="font-mono">Port name: {name}</p>
       {portData ? (
         <pre className="bg-gray-200 p-2 rounded">{JSON.stringify(portData, null, 2)}</pre>
       ) : (

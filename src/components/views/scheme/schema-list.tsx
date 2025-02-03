@@ -19,15 +19,17 @@ export const SchemaList = () => {
   }, []);
 
   return (
-    <div>
+    <div className='schema-list-view'>
       <h2>Schema List</h2>
-      <Link to='/scheme/edit/new'>New Schema</Link>
-      <ul>
+      <hr />
+      <Link to='/scheme/edit/new'>
+        <button>New Schema</button>
+      </Link>
+      <ul className='schema-list'>
         {schemas.map((scheme) => (
-          <li key={scheme}>
-            {scheme}
-            <Link to={`/scheme/view/${scheme}`} style={{ marginLeft: '10px' }}>View</Link>
-            <Link to={`/scheme/edit/${scheme}`} style={{ marginLeft: '10px' }}>Edit</Link>
+          <li key={scheme} className='schema-list-item'>
+            <div className='scheme-filename'>{scheme}</div>
+            <Link to={`/scheme/view/${scheme}`} className='scheme-view-link'>View</Link>
           </li>
         ))}
       </ul>

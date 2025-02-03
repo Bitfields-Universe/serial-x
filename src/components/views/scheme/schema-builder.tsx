@@ -1,21 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router';
-import VariableNameInput from './variable-name-input';
-import DataTypeSelect from './data-type-select';
-import { invoke } from "@tauri-apps/api/core";
-import { Variable } from '../../../interface';
+import { invoke } from '@tauri-apps/api/core';
 
+interface Variable {
+  name: string;
+  type: string;
+}
+
+const PROTOBUF_TYPES = [
+  "double", "float", "int32", "int64", "uint32", "uint64",
+  "sint32", "sint64", "fixed32", "fixed64", "sfixed32", "sfixed64",
+  "bool", "string", "bytes"
+];
 
 export const SchemaBuilder: React.FC = () => {
   const location = useLocation();
   const [variables, setVariables] = useState<Variable[]>([]);
   const [fileName, setFileName] = useState('');
+  const [delimiter, setDelimiter] = useState(',');
+  const [packetDelimiter, setPacketDelimiter] = useState(';');
 
   useEffect(() => {
+    if (location.state?.schemaFileName) {
+      setFileName(location.state.schemaFileName); // Set file name
+    }
     if (location.state?.schemaContent) {
       try {
         const parsedSchema = JSON.parse(location.state.schemaContent);
-        setVariables(parsedSchema);
+        setVariables(parsedSchema.variables || []);
+        setDelimiter(parsedSchema.delimiter || ',');
+        setPacketDelimiter(parsedSchema.packetDelimiter || ';');
       } catch (error) {
         console.error('Error parsing schema:', error);
       }
@@ -23,14 +37,12 @@ export const SchemaBuilder: React.FC = () => {
   }, [location.state]);
 
   const addVariable = () => {
-    setVariables([...variables, { id: Date.now(), name: '', type: 'double' }]);
+    setVariables([...variables, { name: '', type: 'double' }]);
   };
 
-  const updateVariable = (id: number, key: keyof Variable, value: string) => {
+  const updateVariable = (index: number, key: keyof Variable, value: string) => {
     setVariables(
-      variables.map((v) =>
-        v.id === id ? { ...v, [key]: value } : v
-      )
+      variables.map((v, i) => (i === index ? { ...v, [key]: value } : v))
     );
   };
 
@@ -42,7 +54,7 @@ export const SchemaBuilder: React.FC = () => {
     try {
       await invoke('save_schema', {
         fileName,
-        schemaData: JSON.stringify(variables, null, 2),
+        schemaData: JSON.stringify({ variables, delimiter, packetDelimiter }, null, 2),
       });
       alert('Schema saved successfully!');
     } catch (error) {
@@ -52,38 +64,56 @@ export const SchemaBuilder: React.FC = () => {
 
   return (
     <div className='schema-builder'>
-      <div className='half'>
-        <h2>Schema Builder</h2>
-        <hr />
-        <input
-          type="text"
-          placeholder="Enter schema file name"
-          value={fileName}
-          onChange={(e) => setFileName(e.target.value)}
-        />
-        <hr />
-        {variables.map((variable) => (
-          <div key={variable.id} style={{ display: 'flex', gap: '10px' }}>
-            <VariableNameInput
-              value={variable.name}
-              onChange={(value: any) => updateVariable(variable.id, 'name', value)}
-            />
-            <DataTypeSelect
-              value={variable.type}
-              onChange={(value: any) => updateVariable(variable.id, 'type', value)}
-            />
-          </div>
-        ))}
-        <hr />
-        <div className='button-group'>
-          <button onClick={addVariable}>+ Add Variable</button>
-          <button onClick={handleSave}>Save Schema</button>
+      <h2>Schema Builder</h2>
+      <hr />
+      <label>Schema File Name:</label>
+      <input
+        type='text'
+        placeholder='Enter schema file name'
+        value={fileName}
+        onChange={(e) => setFileName(e.target.value)}
+      />
+      <label>Field Delimiter:</label>
+      <input
+        type='text'
+        placeholder='Enter field delimiter'
+        value={delimiter}
+        onChange={(e) => setDelimiter(e.target.value)}
+      />
+      <label>Packet Delimiter:</label>
+      <input
+        type='text'
+        placeholder='Enter packet delimiter'
+        value={packetDelimiter}
+        onChange={(e) => setPacketDelimiter(e.target.value)}
+      />
+      <hr />
+      <h3>Variables</h3>
+      {variables.map((variable, index) => (
+        <div key={index} style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <label>Variable Name:</label>
+          <input
+            type='text'
+            placeholder='Variable Name'
+            value={variable.name}
+            onChange={(e) => updateVariable(index, 'name', e.target.value)}
+          />
+          <label>Data Type:</label>
+          <select
+            value={variable.type}
+            onChange={(e) => updateVariable(index, 'type', e.target.value)}
+          >
+            {PROTOBUF_TYPES.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
         </div>
-      </div>
-      <div className='half'>
-        <h3>Generated Schema:</h3>
-        <pre>{JSON.stringify(variables, null, 2)}</pre>
-      </div>
+      ))}
+      <hr />
+      <button onClick={addVariable}>+ Add Variable</button>
+      <button onClick={handleSave}>Save Schema</button>
     </div>
   );
 };

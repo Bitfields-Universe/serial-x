@@ -1,0 +1,18 @@
+{
+  "variables": [
+    {
+      "name": "v1",
+      "type": "double"
+    },
+    {
+      "name": "v2",
+      "type": "double"
+    },
+    {
+      "name": "v3",
+      "type": "double"
+    }
+  ],
+  "delimiter": ",",
+  "packetDelimiter": ";"
+}

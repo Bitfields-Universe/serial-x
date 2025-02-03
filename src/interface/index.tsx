@@ -17,11 +17,12 @@ export interface DataTypeSelectProps {
     onChange: (value: string) => void;
 }
 
+
 export interface Variable {
     id: number;
     name: string;
     type: string;
-}
+  }
 
 export interface VariableNameInputProps {
     value: string;

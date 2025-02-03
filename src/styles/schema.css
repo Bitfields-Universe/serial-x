@@ -1,6 +1,36 @@
 .schema-builder {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: var(--view-width);
     height: var(--view-height);
+}
+
+.schema-list-view {
+    width: var(--view-width);
+    height: var(--view-height);
+    padding: var(--md);
+}
+
+.schema-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    width: max-content;
+    margin-top: var(--sm);
+    border: var(--border-1);
+}
+
+.schema-list-item {
+    display: flex;
+    width: 100%;
+    padding: var(--xsm) var(--md);
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--bg-2);
+}
+
+.scheme-view-link {
+    color: var(--blue);
+    margin-left: var(--md);
 }

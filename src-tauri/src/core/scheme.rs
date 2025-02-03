@@ -42,3 +42,15 @@ pub fn read_schema(file_name: String) -> Result<String, String> {
     fs::read_to_string(path).map_err(|e| e.to_string())
 }
 
+#[command]
+pub fn delete_schema(file_name: String) -> Result<(), String> {
+    let path = PathBuf::from(format!("./schemas/{}", file_name));
+    
+    if path.exists() {
+        fs::remove_file(&path).map_err(|e| e.to_string())?;
+        Ok(())
+    } else {
+        Err("Schema file not found".to_string())
+    }
+}
+

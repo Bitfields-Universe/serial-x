@@ -71,7 +71,7 @@ export const SerialPortList: React.FC = () => {
       ) : (
         <div className='port-list'>
           {filteredPorts.map((port) => (
-            <Link key={port.name} to={`/port/${port.name.replaceAll('/', '')}`}>
+            <Link key={port.name} to={`/port/${btoa(port.name)}`}>
               <SerialPortListItem port={port} />
             </Link>
           ))}

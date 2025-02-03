@@ -16,6 +16,7 @@ pub fn run() {
             core::scheme::save_schema,
             core::scheme::list_schemas,
             core::scheme::read_schema,
+            core::scheme::delete_schema,
             core::log::log_message,
         ])
         .run(tauri::generate_context!())
