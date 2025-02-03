@@ -4,8 +4,7 @@ import "./App.css";
 import { Home, Settings, SerialPortList, PortInfo } from './components/views';
 import { TopMenu } from "./components/layout";
 import { ThemeSwitch } from "./components/layout";
-import { SchemaBuilder } from "./components/views/scheme";
-import { SchemaList } from "./components/views/scheme";
+import { SchemaBuilder, SchemaViewer, SchemaList } from "./components/views/scheme";
 import { SerialPortProvider } from "./context/serial-port";
 // import { SettingsProvider } from "./context/settings";
 
@@ -52,6 +51,7 @@ function App() {
                 <Route path="/port/:id" element={<PortInfo />} />
                 <Route path="scheme" element={<SchemaList />} />
                 <Route path="scheme/edit/:id" element={<SchemaBuilder />} />
+                <Route path="scheme/view/:name" element={<SchemaViewer />} />
               </Routes>
 
             </div>
