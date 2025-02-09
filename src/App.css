@@ -58,8 +58,8 @@ option {
 }
 
 hr {
-    height: 2px;
-    background: var(--gradient-4);
+    height: 1px;
+    background: var(--gradient-1);
     border: none;
     margin: var(--xsm) 0;
 }
@@ -78,4 +78,8 @@ button:hover {
     color: var(--bg-1);
     background-color: var(--fg-1);
     transition: background-color var(--dt-sm);
+}
+
+fieldset {
+    border: none;
 }

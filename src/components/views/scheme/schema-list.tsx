@@ -22,14 +22,17 @@ export const SchemaList = () => {
     <div className='schema-list-view'>
       <h2>Schema List</h2>
       <hr />
-      <Link to='/scheme/edit/new'>
-        <button>New Schema</button>
-      </Link>
+      <div>
+        <Link to='/scheme/edit/new'>
+          <button>New Schema</button>
+        </Link>
+      </div>
       <ul className='schema-list'>
         {schemas.map((scheme) => (
           <li key={scheme} className='schema-list-item'>
-            <div className='scheme-filename'>{scheme}</div>
-            <Link to={`/scheme/view/${scheme}`} className='scheme-view-link'>View</Link>
+            <Link to={`/scheme/view/${scheme}`} className='scheme-view-link'>
+              <div className='scheme-filename'>{scheme}</div>
+            </Link>
           </li>
         ))}
       </ul>

@@ -8,7 +8,6 @@
     height: 100%;
     background-color: var(--bg-1);
     border-right: var(--border-1);
-    padding: var(--md) 0;
 }
 .sidebar .sidebar-item {
     display: flex;
@@ -17,15 +16,15 @@
     align-items: center;
     width: 100%;
     padding: var(--xsm) var(--lg);
-    margin-bottom: var(--sm);
+    margin-bottom: var(--xxsm);
     cursor: pointer;
     color: var(--fg-1);
-    background: var(--gradient-5);
+    background: var(--gradient-1);
     transition: color var(--dt-sm);
 }
 .sidebar .sidebar-item:hover {
-    color: var(--bg-1);
-    background: var(--gradient-4);
+    color: var(--blue);
+    background: var(--gradient-2);
     transition: color var(--dt-sm);
 }
 

@@ -1,3 +1,4 @@
+/* Schema builder */
 .schema-builder {
     display: flex;
     flex-direction: column;
@@ -5,6 +6,7 @@
     height: var(--view-height);
 }
 
+/* Schema List */
 .schema-list-view {
     width: var(--view-width);
     height: var(--view-height);
@@ -14,23 +16,109 @@
 .schema-list {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: center;
     width: max-content;
     margin-top: var(--sm);
-    border: var(--border-1);
+    border: var(--border-2);
+    border-radius: var(--xsm);
 }
 
 .schema-list-item {
     display: flex;
     width: 100%;
     padding: var(--xsm) var(--md);
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
     border-bottom: 1px solid var(--bg-2);
 }
 
+.schema-list-item:hover {
+    background: var(--gradient-1);
+}
+
 .scheme-view-link {
+    color: var(--fg-1);
+    transition: color var(--dt-sm);
+
+}
+
+.scheme-view-link:hover {
     color: var(--blue);
-    margin-left: var(--md);
+    transition: color var(--dt-sm);
+}
+
+/* Schema viewer */
+.schema-viewer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: var(--md);
+    background: var(--bg-1);
+    color: var(--fg-1);
+    width: 100%;
+    max-width: var(--view-width);
+}
+
+.schema-viewer-container {
+    padding: var(--md);
+}
+
+.variable-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--xsm);
+    width: 100%;
+    margin-top: var(--sm);
+}
+
+.variable {
+    display: flex;
+    justify-content: space-between;
+    background: var(--gradient-1);
+    padding: var(--sm);
+    border-radius: var(--xxsm);
+    width: 20vw;
+    transition: background var(--dt-sm);
+}
+
+.variable:hover {
+    background: var(--gradient-2);
+}
+
+.variable-name {
+    font-weight: bold;
+    color: var(--fg-1);
+
+}
+
+.variable-type {
+    font-style: italic;
+    color: var(--fg-3);
+
+}
+
+.schema-delimiters {
+    display: flex;
+    flex-direction: column;
+    padding: var(--sm);
+    border-radius: var(--xxsm);
+    margin-top: var(--md);
+    width: 20vw;
+    box-shadow: 0 0 var(--xxsm) var(--bg-3);
+}
+
+.schema-delimiters p {
+    width: 100%;
+}
+
+.schema-actions {
+    display: flex;
+    gap: var(--sm);
+    margin-top: var(--md);
+    padding: var(--sm);
+    background: var(--bg-2);
+    border-radius: var(--xxsm);
+    border: var(--border-1);
 }

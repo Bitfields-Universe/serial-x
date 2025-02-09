@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { invoke } from "@tauri-apps/api/core";
 import { Variable } from "../../../interface";
+import "./SchemaViewer.css";
 
 export const SchemaViewer: React.FC = () => {
   const { name } = useParams<{ name: string }>();
@@ -29,9 +30,9 @@ export const SchemaViewer: React.FC = () => {
 
   const handleEditClick = () => {
     navigate(`/scheme/edit/${name}`, {
-      state: { 
-        schemaFileName: name?.split('.')[0], // Pass file name
-        schemaContent: JSON.stringify({ variables, delimiter, packetDelimiter }) 
+      state: {
+        schemaFileName: name?.split('.')[0],
+        schemaContent: JSON.stringify({ variables, delimiter, packetDelimiter })
       },
     });
   };
@@ -48,31 +49,29 @@ export const SchemaViewer: React.FC = () => {
     }
   };
 
-  if (error) return <p style={{ color: 'red' }}>{error}</p>;
+  if (error) return <p className="error-message">{error}</p>;
 
   return (
-    <div>
+    <div className="schema-viewer">
       <h2>Schema: {name}</h2>
-      <table border={1}>
-        <thead>
-          <tr>
-            <th>Variable Name</th>
-            <th>Data Type</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div className="schema-viewer-container">
+        <div className="variable-container">
           {variables.map((variable) => (
-            <tr key={variable.id}>
-              <td>{variable.name}</td>
-              <td>{variable.type}</td>
-            </tr>
+            <div key={variable.id} className="variable">
+              <div className="variable-name">{variable.name}</div>
+              <div className="variable-type">({variable.type})</div>
+            </div>
           ))}
-        </tbody>
-      </table>
-      <p>Field Delimiter: <strong>{delimiter}</strong></p>
-      <p>Packet Delimiter: <strong>{packetDelimiter}</strong></p>
-      <button onClick={handleEditClick}>Edit</button>
-      <button onClick={handleDeleteClick}>Delete</button>
+        </div>
+        <div className="schema-delimiters">
+          <p>Field Delimiter: <strong>{delimiter}</strong></p>
+          <p>Packet Delimiter: <strong>{packetDelimiter}</strong></p>
+        </div>
+        <fieldset className="schema-actions">
+          <button onClick={handleEditClick} className="edit-button">Edit</button>
+          <button onClick={handleDeleteClick} className="delete-button">Delete</button>
+        </fieldset>
+      </div>
     </div>
   );
 };
