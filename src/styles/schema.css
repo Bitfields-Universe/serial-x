@@ -62,15 +62,22 @@
 }
 
 .schema-viewer-container {
-    padding: var(--md);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: var(--xsm);
+    border: var(--border-1);
+    border-radius: var(--xxsm);
+    margin-top: var(--lg);
 }
 
 .variable-container {
     display: flex;
     flex-direction: column;
-    gap: var(--xsm);
+    /* justify-content: flex-start; */
+    /* align-items: center; */
     width: 100%;
-    margin-top: var(--sm);
 }
 
 .variable {
@@ -79,8 +86,7 @@
     background: var(--gradient-1);
     padding: var(--sm);
     border-radius: var(--xxsm);
-    width: 20vw;
-    transition: background var(--dt-sm);
+    width: 100%;
 }
 
 .variable:hover {
@@ -88,7 +94,6 @@
 }
 
 .variable-name {
-    font-weight: bold;
     color: var(--fg-1);
 
 }
@@ -102,11 +107,8 @@
 .schema-delimiters {
     display: flex;
     flex-direction: column;
-    padding: var(--sm);
     border-radius: var(--xxsm);
-    margin-top: var(--md);
-    width: 20vw;
-    box-shadow: 0 0 var(--xxsm) var(--bg-3);
+    width: 25vw;
 }
 
 .schema-delimiters p {
@@ -115,10 +117,6 @@
 
 .schema-actions {
     display: flex;
-    gap: var(--sm);
-    margin-top: var(--md);
-    padding: var(--sm);
-    background: var(--bg-2);
+    padding: var(--xsm);
     border-radius: var(--xxsm);
-    border: var(--border-1);
 }

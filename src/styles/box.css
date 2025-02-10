@@ -1,0 +1,9 @@
+.box {
+    display: flex;
+    background: var(--gradient-1);
+    border-radius: var(--xxsm);
+}
+
+.box:hover {
+    background: var(--gradient-2);
+}

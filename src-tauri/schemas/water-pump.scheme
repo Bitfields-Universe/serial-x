@@ -1,0 +1,18 @@
+{
+  "variables": [
+    {
+      "name": "rpm",
+      "type": "int32"
+    },
+    {
+      "name": "P",
+      "type": "double"
+    },
+    {
+      "name": "temp",
+      "type": "double"
+    }
+  ],
+  "delimiter": ",",
+  "packetDelimiter": ";"
+}

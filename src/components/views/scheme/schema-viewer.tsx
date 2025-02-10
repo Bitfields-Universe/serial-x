@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { invoke } from "@tauri-apps/api/core";
 import { Variable } from "../../../interface";
-import "./SchemaViewer.css";
+
 
 export const SchemaViewer: React.FC = () => {
   const { name } = useParams<{ name: string }>();
@@ -59,19 +59,23 @@ export const SchemaViewer: React.FC = () => {
           {variables.map((variable) => (
             <div key={variable.id} className="variable">
               <div className="variable-name">{variable.name}</div>
-              <div className="variable-type">({variable.type})</div>
+              <div className="variable-type">{variable.type}</div>
             </div>
           ))}
         </div>
         <div className="schema-delimiters">
-          <p>Field Delimiter: <strong>{delimiter}</strong></p>
-          <p>Packet Delimiter: <strong>{packetDelimiter}</strong></p>
+          <div className="variable">
+            <div>Field Delimiter  {delimiter}</div>
+          </div>
+          <div className="variable">
+            <div>Packet Delimiter {packetDelimiter}</div>
+          </div>
         </div>
-        <fieldset className="schema-actions">
-          <button onClick={handleEditClick} className="edit-button">Edit</button>
-          <button onClick={handleDeleteClick} className="delete-button">Delete</button>
-        </fieldset>
       </div>
+      <fieldset className="schema-actions">
+        <button onClick={handleEditClick} className="edit-button">Edit</button>
+        <button onClick={handleDeleteClick} className="delete-button">Delete</button>
+      </fieldset>
     </div>
   );
 };
