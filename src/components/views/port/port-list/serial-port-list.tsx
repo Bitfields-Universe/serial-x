@@ -43,7 +43,7 @@ export const SerialPortList: React.FC = () => {
 
   return (
     <div className='port-view'>
-      <div className='box'>
+      <div className="flex-row">
         <div className='box'>
           <label htmlFor='show-only-open-ports'>Show only open ports</label>
           <input
@@ -53,7 +53,6 @@ export const SerialPortList: React.FC = () => {
             onChange={(e) => setShowOnlyOpenPortsState(e.target.checked)}
           />
         </div>
-        <div className='separator'></div>
         <div className='box'>
           <label htmlFor='refresh-rate'>Scan interval</label>
           <input
@@ -67,7 +66,9 @@ export const SerialPortList: React.FC = () => {
         </div>
       </div>
       {filteredPorts.length === 0 ? (
-        <h1 className='info'>No ports available</h1>
+        <div className='flex-row flex-center-all w-100'>
+          <h1 className='info'>No ports available</h1>
+        </div>
       ) : (
         <div className='port-list'>
           {filteredPorts.map((port) => (

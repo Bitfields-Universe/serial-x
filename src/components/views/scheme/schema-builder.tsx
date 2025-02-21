@@ -66,54 +66,60 @@ export const SchemaBuilder: React.FC = () => {
     <div className='schema-builder'>
       <h2>Schema Builder</h2>
       <hr />
-      <label>Schema File Name:</label>
-      <input
-        type='text'
-        placeholder='Enter schema file name'
-        value={fileName}
-        onChange={(e) => setFileName(e.target.value)}
-      />
-      <label>Field Delimiter:</label>
-      <input
-        type='text'
-        placeholder='Enter field delimiter'
-        value={delimiter}
-        onChange={(e) => setDelimiter(e.target.value)}
-      />
-      <label>Packet Delimiter:</label>
-      <input
-        type='text'
-        placeholder='Enter packet delimiter'
-        value={packetDelimiter}
-        onChange={(e) => setPacketDelimiter(e.target.value)}
-      />
-      <hr />
-      <h3>Variables</h3>
-      {variables.map((variable, index) => (
-        <div key={index} style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-          <label>Variable Name:</label>
-          <input
-            type='text'
-            placeholder='Variable Name'
-            value={variable.name}
-            onChange={(e) => updateVariable(index, 'name', e.target.value)}
-          />
-          <label>Data Type:</label>
-          <select
-            value={variable.type}
-            onChange={(e) => updateVariable(index, 'type', e.target.value)}
-          >
-            {PROTOBUF_TYPES.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
-        </div>
-      ))}
-      <hr />
-      <button onClick={addVariable}>+ Add Variable</button>
-      <button onClick={handleSave}>Save Schema</button>
+      <div className="box">
+        <label>Schema File Name:</label>
+        <input
+          type='text'
+          placeholder='Enter schema file name'
+          value={fileName}
+          onChange={(e) => setFileName(e.target.value)}
+        />
+      </div>
+      <div className="box">
+        <label>Field Delimiter: </label>
+        <input
+          type='text'
+          placeholder='Enter field delimiter'
+          value={delimiter}
+          onChange={(e) => setDelimiter(e.target.value)}
+        />
+      </div>
+      <div className="box">
+        <label>Packet Delimiter:</label>
+        <input
+          type='text'
+          placeholder='Enter packet delimiter'
+          value={packetDelimiter}
+          onChange={(e) => setPacketDelimiter(e.target.value)}
+        />
+      </div>
+      <div className="box flex-column">
+        <h3>Variables</h3>
+        {variables.map((variable, index) => (
+          <div key={index}>
+            <input
+              type='text'
+              placeholder='Variable Name'
+              value={variable.name}
+              onChange={(e) => updateVariable(index, 'name', e.target.value)}
+            />
+            <select
+              value={variable.type}
+              onChange={(e) => updateVariable(index, 'type', e.target.value)}
+            >
+              {PROTOBUF_TYPES.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
+          </div>
+        ))}
+      </div>
+      <div className="box">
+        <button onClick={addVariable}>+ Add Variable</button>
+        <button onClick={handleSave}>Save Schema</button>
+      </div>
     </div>
   );
 };

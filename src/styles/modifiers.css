@@ -1,9 +1,11 @@
+/* misc */
 .user-selectable {
     user-select: initial;
     -webkit-user-select: initial;
 }
 
 
+/* color */
 .blue { color: var(--blue)}
 .red { color: var(--red)}
 .orange { color: var(--orange)}
@@ -13,6 +15,8 @@
 .warning { color: var(--orange)}
 .ok { color: var(--green)}
 
+
+/* text */
 .text-centered {
     text-align: center;
 }
@@ -20,6 +24,21 @@
     text-align: left;
 }
 
+/* sizes */
 .half {
     width: 50%;
+}
+.w-100 {
+    width: 100%;
+}
+
+/* padding */
+.p-sm {
+    padding: var(--sm);
+}
+
+/* flex */
+.flex-center-all {
+    justify-content: center;
+    align-items: center;
 }

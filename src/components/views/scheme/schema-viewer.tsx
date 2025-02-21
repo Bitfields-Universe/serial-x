@@ -64,11 +64,13 @@ export const SchemaViewer: React.FC = () => {
           ))}
         </div>
         <div className="schema-delimiters">
-          <div className="variable">
-            <div>Field Delimiter  {delimiter}</div>
+          <div className="schema-delimiter">
+            <div>Field Delimiter  </div>
+            <div>{delimiter}</div>
           </div>
-          <div className="variable">
-            <div>Packet Delimiter {packetDelimiter}</div>
+          <div className="schema-delimiter">
+            <div>Packet Delimiter </div>
+            <div>{packetDelimiter}</div>
           </div>
         </div>
       </div>

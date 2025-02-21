@@ -1,9 +1,10 @@
 .box {
     display: flex;
-    background: var(--gradient-1);
+    justify-content: flex-start;
+    padding: var(--sm);
     border-radius: var(--xxsm);
-}
-
-.box:hover {
-    background: var(--gradient-2);
+    border: var(--border-2);
+    /* min-width: 50vw; */
+    width: max-content;
+    margin-bottom: var(--sm);
 }

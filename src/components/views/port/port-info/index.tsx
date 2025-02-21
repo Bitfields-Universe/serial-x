@@ -3,8 +3,9 @@ import { useParams } from "react-router";
 import { invoke } from "@tauri-apps/api/core";
 import { SerialPort } from "../../../../interface";
 
+
 export const PortInfo = () => {
-  let { name } = useParams(); // Extracts the id from the URL
+  let { name } = useParams();
   if (name) {
     name = atob(name);
   }
@@ -12,7 +13,7 @@ export const PortInfo = () => {
   const [portData, setPortData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isPortOpen, setIsPortOpen] = useState(false); // State to track port status
+  const [isPortOpen, setIsPortOpen] = useState(false);
 
   useEffect(() => {
     if (!name) return;
@@ -23,8 +24,7 @@ export const PortInfo = () => {
         console.log("data: ", data);
 
         setPortData(data as SerialPort);
-        // Assuming portData includes a field indicating whether the port is open
-        setIsPortOpen(data.status || false); // Adjust based on actual data structure
+        setIsPortOpen(data.status || false);
       } catch (err) {
         setError("Failed to fetch port info");
       } finally {
@@ -38,19 +38,23 @@ export const PortInfo = () => {
   const togglePortState = async () => {
     try {
       if (isPortOpen) {
-        // Close port
         await invoke("close_port", { name });
       } else {
-        // Open port
         await invoke("open_port", { name });
       }
-      setIsPortOpen((prevState) => !prevState); // Toggle port state
+      setIsPortOpen((prevState) => !prevState);
     } catch (err) {
       setError("Failed to toggle port state");
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div className="flex items-center justify-center h-full">
+        <h1>Connecting...</h1>
+      </div>
+    );
+
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (

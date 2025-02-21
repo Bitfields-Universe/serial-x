@@ -29,15 +29,17 @@ input {
 
 input[type="text"], textarea {
     color: var(--fg-1) !important;
-    background-color: var(--bg-3) !important;
+    background-color: var(--bg-1) !important;
     margin: 0 var(--sm);
     border-radius: 0;
     border: none;
     outline: none;
+    padding: var(--xxsm);
+    border-bottom: var(--border-2);
 }
 input[type="select"], textarea {
     color: var(--fg-1) !important;
-    background-color: var(--bg-3) !important;
+    background-color: var(--bg-1) !important;
     border-radius: 0;
     border: none;
     outline: none;
@@ -46,7 +48,7 @@ input[type="select"], textarea {
 select {
     appearance: unset;
     color: var(--fg-1) !important;
-    background-color: var(--bg-3) !important;
+    background-color: var(--bg-1) !important;
     border-radius: 0;
     border: none;
     outline: none;
